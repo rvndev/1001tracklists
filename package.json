@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx glob -c \"node --loader tsx --no-warnings --test\" \"./test/**/*.spec.ts\""
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
+  "type": "module",
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
@@ -25,6 +26,8 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
+    "glob": "^10.2.5",
+    "husky": "^8.0.3",
     "tsx": "^3.12.7",
     "typescript": "^5.0.4"
   }
