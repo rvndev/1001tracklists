@@ -1,4 +1,4 @@
-interface Solution {
+export interface Solution {
   guid: string
   captcha: 1
   ts: number
@@ -6,13 +6,13 @@ interface Solution {
 }
 
 // This function that was hidden  as String.prototype.toLowerText() in the HTML challenge page.
-function obfuscate (bChk: string): number {
+export function encode (plaintext: string): number {
   let h = 0
   let i
   let c
 
-  for (i = 0; i < bChk.length; i++) {
-    c = bChk.charCodeAt(i)
+  for (i = 0; i < plaintext.length; i++) {
+    c = plaintext.charCodeAt(i)
     h = ((h << 5) - h) + c
   }
   return h
@@ -33,7 +33,7 @@ export async function solveChallenge (res: Response): Promise<Solution> {
   const tempVariableSnippet = html.match(/<script>var .*<\/script>/)?.[0]
   const tempVariableValue = tempVariableSnippet?.match(/'.*'/)?.[0].replace(/'/g, '')
   if (tempVariableValue === undefined) throw new Error('bChk could not be extracted')
-  const bChk = obfuscate(tempVariableValue)
+  const bChk = encode(tempVariableValue)
 
   const timestampSnippet = html.match(/i\.name='ts';i\.value=\s\d+/)
   const ts = Number(timestampSnippet?.[0].match(/\d+/)?.[0])
@@ -71,7 +71,7 @@ export async function requestChallenge (url: string): Promise<Response> {
   })
 }
 
-export async function postSolution (url: string, solution: Solution): Promise<Response> {
+export async function sendResponse (url: string, solution: Solution): Promise<Response> {
   const { captcha, ts, bChk, guid } = solution
   return fetch(url, {
     headers: {
