@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prepare" : "build",
     "lint": "eslint . --fix",
     "build": "tsc",
     "test": "glob -c \"node --loader tsx --no-warnings --test\" \"./test/**/*.spec.ts\""
