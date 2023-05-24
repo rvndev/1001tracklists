@@ -32,6 +32,9 @@
                 "checksVoidReturn": false
             }
         ],
+        "@typescript-eslint/strict-boolean-expressions": ["error", {
+            "allowString": true
+        }],
         "max-len": ["error", {"code": 120, "tabWidth": 2, "ignoreTemplateLiterals": true, "ignoreStrings": true, "ignoreComments": true, "ignoreTrailingComments": true}]
     },
     "root": true,
