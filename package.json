@@ -1,17 +1,19 @@
 {
   "name": "1001tracklists",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "An unofficial 1001tracklists library",
+  "main": "dist/src/index.js",
   "scripts": {
     "lint": "eslint . --fix",
-    "build": "tsc",
-    "clean": "rm -rf dist/",
-    "start": "node dist/src/index.js",
+    "build": "rm -rf dist/ && tsc",
     "test": "glob -c \"node  --test\" \"./dist/test/**/*.spec.js\""
   },
   "keywords": [],
-  "author": "",
+  "author": "rvndev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rvndev/1001tracklists.git"
+  },
   "license": "MIT",
   "commitlint": {
     "extends": [
