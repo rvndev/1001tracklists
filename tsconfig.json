@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES6",
     "lib": [
-      "ES6"
+      "ES6",
     ],
     "moduleResolution": "node",
     "module": "CommonJS",
@@ -16,7 +16,8 @@
     "declaration": true,
     "removeComments": true,
     "sourceMap": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "allowJs": true
   },
   "include": [
     "src",

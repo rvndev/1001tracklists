@@ -19,6 +19,7 @@
     ],
     "rules": {
         "no-return-await": "error",
+        "no-unused-vars": "error",
         "@typescript-eslint/return-await": "off",
         "@typescript-eslint/no-floating-promises": [
             "error",
