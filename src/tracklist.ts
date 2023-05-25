@@ -1,6 +1,5 @@
 import { getMetaContent, getTrackName, parseDurationToNumber } from './utils'
 
-// TODO: implement genres
 export interface Tracklist {
   name: string
   artist: string
@@ -20,7 +19,7 @@ export interface Track {
   url: string
 }
 
-export function parseTrack (element: Element): Track {
+export function extractTrack (element: Element): Track {
   if (!element.querySelector('.trackValue')) {
     console.log(element.outerHTML)
     throw new Error('Track not found')
@@ -41,16 +40,15 @@ export function parseTrack (element: Element): Track {
   return track
 }
 
-// Create a function stub for parseTracklist(document: Document): Tracklist
-export function parseTracklist (document: Document): Tracklist {
+export function extractTracklist (document: Document): Tracklist {
   const infoDiv = document.querySelector('#tlTab')
 
   if (!infoDiv) {
     throw new Error('Tracklist not found')
   }
 
-  const genres = Array.from(document.querySelectorAll('#tlTab > meta[itemprop=genre]')).map(genre => genre.getAttribute('content') ?? ''),
-  const tracks = Array.from(document.querySelectorAll('[id$="_content"]')).map(parseTrack)
+  const genres = Array.from(document.querySelectorAll('#tlTab > meta[itemprop=genre]')).map(genre => genre.getAttribute('content') ?? '')
+  const tracks = Array.from(document.querySelectorAll('[id$="_content"]')).map(extractTrack)
 
   const tracklist = {
     name: getMetaContent(infoDiv, 'itemprop=name'),

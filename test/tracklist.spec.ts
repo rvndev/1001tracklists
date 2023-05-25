@@ -2,7 +2,7 @@ import { readFileSync } from 'fs'
 import { JSDOM } from 'jsdom'
 import assert from 'node:assert'
 import { describe, it } from 'node:test'
-import { parseTrack, parseTracklist, type Track, type Tracklist } from '../src/tracklist'
+import { extractTrack, extractTracklist, type Track, type Tracklist } from '../src/tracklist'
 import { omit } from './utils'
 
 describe('Track', () => {
@@ -25,7 +25,7 @@ describe('Track', () => {
       throw new Error(`No results match the ${selector} selector in the html code`)
     }
 
-    assert.deepStrictEqual(track, parseTrack(trackDiv))
+    assert.deepStrictEqual(track, extractTrack(trackDiv))
   })
 
   it('should parse an unidentified track', () => {
@@ -45,7 +45,7 @@ describe('Track', () => {
       throw new Error(`No results match the ${selector} selector in the html code`)
     }
 
-    assert.deepStrictEqual(track, parseTrack(trackDiv))
+    assert.deepStrictEqual(track, extractTrack(trackDiv))
   })
 
   it('should parse an unnamed track', () => {
@@ -65,7 +65,7 @@ describe('Track', () => {
       throw new Error(`No results match the ${selector} selector in the html code`)
     }
 
-    assert.deepStrictEqual(track, parseTrack(trackDiv))
+    assert.deepStrictEqual(track, extractTrack(trackDiv))
   })
 
   it('should throw on invalid input', () => {
@@ -76,7 +76,7 @@ describe('Track', () => {
       throw new Error("Couldn't find find a valid track in given html")
     }
 
-    assert.throws(() => parseTrack(nonTrackDiv))
+    assert.throws(() => extractTrack(nonTrackDiv))
   })
 })
 
@@ -103,7 +103,7 @@ describe('Tracklist', () => {
       url: 'https://www.1001tracklists.com/tracklist/1gz59x6t/bicep-the-warehouse-project-rdm-rotterdam-netherlands-2023-04-28.html'
     }
 
-    const parsedTracklist = parseTracklist(document)
+    const parsedTracklist = extractTracklist(document)
 
     assert.strictEqual(parsedTracklist.tracks.length, mockTracklist.tracks.length)
 
@@ -114,6 +114,6 @@ describe('Tracklist', () => {
     const html = readFileSync('./test/captcha.html', 'utf8')
     const { document } = (new JSDOM(html)).window
 
-    assert.throws(() => parseTracklist(document))
+    assert.throws(() => extractTracklist(document))
   })
 })
