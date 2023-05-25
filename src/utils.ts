@@ -55,6 +55,18 @@ export function getRandomTracklist (): string {
   return TRACKLISTS[Math.floor(Math.random()) * TRACKLISTS.length]
 }
 
+export function getMetaContent (element: ParentNode, selectors: string, defaultValue = ''): string {
+  return element.querySelector(`meta[${selectors}]`)?.getAttribute('content') ?? defaultValue
+}
+
+// TODO: will break if the track contained ' - ' in title
+export function getTrackName (element: ParentNode): string {
+  const nameWithArist = getMetaContent(element, 'itemprop=name', 'ID')
+  const nameSplit = nameWithArist.split(' - ')
+
+  return nameSplit.length > 1 ? nameSplit[1] : 'ID'
+}
+
 export function parseDurationToNumber (durationString: string): number {
   // Regular expressions to match duration components
   const regex = /P((\d+)Y)?((\d+)M)?((\d+)D)?T?((\d+)H)?((\d+)M)?((\d+(\.\d+)?)S)?/
@@ -62,7 +74,7 @@ export function parseDurationToNumber (durationString: string): number {
   // Extract duration components using regex
   const match = regex.exec(durationString)
   if ((match === null) || match.length < 13) {
-    throw new Error('Invalid duration string')
+    throw new Error(`Invalid duration string ${durationString}`)
   }
 
   // Parse each duration component
