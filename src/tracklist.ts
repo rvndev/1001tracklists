@@ -6,6 +6,7 @@ export interface Tracklist {
   artist: string
   date: Date
   tracks: Track[]
+  genres: string[]
   url: string
 }
 
@@ -48,11 +49,15 @@ export function parseTracklist (document: Document): Tracklist {
     throw new Error('Tracklist not found')
   }
 
+  const genres = Array.from(document.querySelectorAll('#tlTab > meta[itemprop=genre]')).map(genre => genre.getAttribute('content') ?? ''),
+  const tracks = Array.from(document.querySelectorAll('[id$="_content"]')).map(parseTrack)
+
   const tracklist = {
     name: getMetaContent(infoDiv, 'itemprop=name'),
     artist: getMetaContent(infoDiv, 'itemprop=author'),
     date: new Date(getMetaContent(infoDiv, 'itemprop=datePublished')),
-    tracks: Array.from(document.querySelectorAll('[id$="_content"]')).map(parseTrack),
+    genres,
+    tracks,
     url: getMetaContent(document, 'property="og:url"')
   }
 

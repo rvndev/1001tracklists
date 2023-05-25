@@ -99,6 +99,7 @@ describe('Tracklist', () => {
       artist: 'Bicep',
       date: new Date('2023-04-28'),
       tracks: Array(22).fill(mockTrack),
+      genres: ['Electronica', 'Breaks'],
       url: 'https://www.1001tracklists.com/tracklist/1gz59x6t/bicep-the-warehouse-project-rdm-rotterdam-netherlands-2023-04-28.html'
     }
 
