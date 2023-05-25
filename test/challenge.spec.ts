@@ -11,6 +11,7 @@ describe('Challenge-Response', async () => {
   })
 
   it('should solve a challenge', async () => {
+    // Values extracted form Network Inspector
     const guid = '19306a27d1f57'
     const ts = 1684501507
     const plaintext = '8610cd2c'
