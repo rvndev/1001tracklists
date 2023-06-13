@@ -48,51 +48,45 @@ const TRACKLISTS = [
   'https://www.1001tracklists.com/tracklist/24d6vg81/solomun-mute-mar-del-plata-buenos-aires-argentina-2023-01-28.html',
   'https://www.1001tracklists.com/tracklist/24d6vg81/solomun-mute-mar-del-plata-buenos-aires-argentina-2023-01-28.html#tlp_8683001',
   'https://www.1001tracklists.com/tracklist/17jqzj2t/mau-p-zoom-room-ubbi-dubbi-festival-united-states-2023-04-22.html',
-  'https://www.1001tracklists.com/tracklist/17jqzj2t/mau-p-zoom-room-ubbi-dubbi-festival-united-states-2023-04-22.html#tlp_8954001'
-]
+  'https://www.1001tracklists.com/tracklist/17jqzj2t/mau-p-zoom-room-ubbi-dubbi-festival-united-states-2023-04-22.html#tlp_8954001',
+];
 
-export function getRandomTracklist (): string {
-  return TRACKLISTS[Math.floor(Math.random()) * TRACKLISTS.length]
+export function getRandomTracklist(): string {
+  return TRACKLISTS[Math.floor(Math.random()) * TRACKLISTS.length];
 }
 
-export function getMetaContent (element: ParentNode, selectors: string, defaultValue = ''): string {
-  return element.querySelector(`meta[${selectors}]`)?.getAttribute('content') ?? defaultValue
+export function getMetaContent(element: ParentNode, selectors: string, defaultValue = ''): string {
+  return element.querySelector(`meta[${selectors}]`)?.getAttribute('content') ?? defaultValue;
 }
 
 // TODO: will break if the track contained ' - ' in title
-export function getTrackName (element: ParentNode): string {
-  const nameWithArist = getMetaContent(element, 'itemprop=name', 'ID')
-  const nameSplit = nameWithArist.split(' - ')
+export function getTrackName(element: ParentNode): string {
+  const nameWithArist = getMetaContent(element, 'itemprop=name', 'ID');
+  const nameSplit = nameWithArist.split(' - ');
 
-  return nameSplit.length > 1 ? nameSplit[1] : 'ID'
+  return nameSplit.length > 1 ? nameSplit[1] : 'ID';
 }
 
-export function parseDurationToNumber (durationString: string): number {
+export function parseDurationToNumber(durationString: string): number {
   // Regular expressions to match duration components
-  const regex = /P((\d+)Y)?((\d+)M)?((\d+)D)?T?((\d+)H)?((\d+)M)?((\d+(\.\d+)?)S)?/
+  const regex = /P((\d+)Y)?((\d+)M)?((\d+)D)?T?((\d+)H)?((\d+)M)?((\d+(\.\d+)?)S)?/;
 
   // Extract duration components using regex
-  const match = regex.exec(durationString)
-  if ((match === null) || match.length < 13) {
-    throw new Error(`Invalid duration string ${durationString}`)
+  const match = regex.exec(durationString);
+  if (match === null || match.length < 13) {
+    throw new Error(`Invalid duration string ${durationString}`);
   }
 
   // Parse each duration component
-  const years = match[2] ? parseInt(match[2]) : 0
-  const months = match[4] ? parseInt(match[4]) : 0
-  const days = match[6] ? parseInt(match[6]) : 0
-  const hours = match[8] ? parseInt(match[8]) : 0
-  const minutes = match[10] ? parseInt(match[10]) : 0
-  const seconds = match[12] ? parseFloat(match[12]) : 0
+  const years = match[2] ? parseInt(match[2]) : 0;
+  const months = match[4] ? parseInt(match[4]) : 0;
+  const days = match[6] ? parseInt(match[6]) : 0;
+  const hours = match[8] ? parseInt(match[8]) : 0;
+  const minutes = match[10] ? parseInt(match[10]) : 0;
+  const seconds = match[12] ? parseFloat(match[12]) : 0;
 
   // Calculate the total duration in seconds
-  const totalSeconds =
-    years * 31536000 +
-    months * 2592000 +
-    days * 86400 +
-    hours * 3600 +
-    minutes * 60 +
-    seconds
+  const totalSeconds = years * 31536000 + months * 2592000 + days * 86400 + hours * 3600 + minutes * 60 + seconds;
 
-  return totalSeconds
+  return totalSeconds;
 }

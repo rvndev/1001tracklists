@@ -1,43 +1,16 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
-        "standard-with-typescript",
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module",
-        "project": "./tsconfig.json"
-    },
-    "plugins": [
-        "@typescript-eslint"
-    ],
-    "rules": {
-        "no-return-await": "error",
-        "no-unused-vars": "error",
-        "@typescript-eslint/return-await": "off",
-        "@typescript-eslint/no-floating-promises": [
-            "error",
-            {
-                "ignoreVoid": true
-            }
-        ],
-        "@typescript-eslint/no-misused-promises": [
-            "error",
-            {
-                "checksVoidReturn": false
-            }
-        ],
-        "@typescript-eslint/strict-boolean-expressions": ["error", {
-            "allowString": true
-        }],
-        "max-len": ["error", {"code": 120, "tabWidth": 2, "ignoreTemplateLiterals": true, "ignoreStrings": true, "ignoreComments": true, "ignoreTrailingComments": true}]
-    },
-    "root": true,
-    "ignorePatterns": ["dist"]
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {},
+  "ignorePatterns": ["dist/"]
 }

@@ -15,25 +15,22 @@
     "url": "https://github.com/rvndev/1001tracklists.git"
   },
   "license": "MIT",
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
+  "lint-staged": {
+    "**/*.ts": [
+      "eslint . --fix",
+      "prettier --write ."
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.6.3",
-    "@commitlint/config-conventional": "^17.6.3",
     "@types/jsdom": "^21.1.1",
     "@types/node": "^20.2.1",
-    "@typescript-eslint/eslint-plugin": "^5.59.6",
-    "@typescript-eslint/parser": "^5.59.6",
-    "eslint": "^8.40.0",
-    "eslint-config-standard-with-typescript": "^34.0.1",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-n": "^15.0.0",
-    "eslint-plugin-promise": "^6.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.11",
+    "@typescript-eslint/parser": "^5.59.11",
+    "eslint": "^8.42.0",
     "glob": "^10.2.5",
     "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "prettier": "^2.8.8",
     "tsx": "^3.12.7",
     "typescript": "^5.0.4"
   },

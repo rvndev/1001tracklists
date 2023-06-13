@@ -1,22 +1,23 @@
-import { solveChallenge, type Solution, requestChallenge } from './challenge'
-import { JSDOM } from 'jsdom'
-import { type Tracklist, extractTracklist } from './tracklist'
+import { solveChallenge, type Solution, requestChallenge } from './challenge';
+import { JSDOM } from 'jsdom';
+import { type Tracklist, extractTracklist } from './tracklist';
 
-export async function fetchTracklist (url: string): Promise<Tracklist> {
-  const challenge = await requestChallenge(url)
-  const solution = await solveChallenge(challenge)
-  const res = await sendResponse(url, solution)
-  const html = await res.text()
-  const { document } = new JSDOM(html).window
+export async function fetchTracklist(url: string): Promise<Tracklist> {
+  const challenge = await requestChallenge(url);
+  const solution = await solveChallenge(challenge);
+  const res = await sendResponse(url, solution);
+  const html = await res.text();
+  const { document } = new JSDOM(html).window;
 
-  return extractTracklist(document)
+  return extractTracklist(document);
 }
 
-export async function sendResponse (url: string, solution: Solution): Promise<Response> {
-  const { captcha, ts, bChk, guid } = solution
+export async function sendResponse(url: string, solution: Solution): Promise<Response> {
+  const { captcha, ts, bChk, guid } = solution;
   return fetch(url, {
     headers: {
-      accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+      accept:
+        'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
       'accept-language': 'en,en-DE;q=0.9,pl-PL;q=0.8,pl;q=0.7',
       'cache-control': 'max-age=0',
       'content-type': 'application/x-www-form-urlencoded',
@@ -29,9 +30,9 @@ export async function sendResponse (url: string, solution: Solution): Promise<Re
       'upgrade-insecure-requests': '1',
       cookie: `guid=${guid}`,
       Referer: url,
-      'Referrer-Policy': 'strict-origin-when-cross-origin'
+      'Referrer-Policy': 'strict-origin-when-cross-origin',
     },
     body: `captcha=${captcha}&ts=${ts}&bChk=${bChk}`,
-    method: 'POST'
-  })
+    method: 'POST',
+  });
 }

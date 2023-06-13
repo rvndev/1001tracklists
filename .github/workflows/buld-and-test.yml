@@ -2,33 +2,33 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
   cache-and-install:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Install pnpm
-      uses: pnpm/action-setup@v2
-      with: 
-        version: 8
-      
-    - name: Install Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 'latest'
-        cache: 'pnpm'
-      
-    - name: Install dependencies
-      run: pnpm install
-      
-    - name: Build 
-      run: pnpm run build
-      
-    - name: Run tests
-      run: pnpm run test
+      - uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'latest'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Run tests
+        run: pnpm run test
