@@ -1,6 +1,7 @@
-import { solveChallenge, type Solution, requestChallenge } from './challenge';
 import { JSDOM } from 'jsdom';
-import { type Tracklist, extractTracklist } from './tracklist';
+
+import { requestChallenge, type Solution, solveChallenge } from './challenge';
+import { extractTracklist, type Tracklist } from './tracklist';
 
 export async function fetchTracklist(url: string): Promise<Tracklist> {
   const challenge = await requestChallenge(url);

@@ -1,11 +1,11 @@
-import { getMetaContent, getTrackName, parseDurationToNumber } from './utils';
+import { getMetaContent, getTrackName, parseDurationToNumber } from '../utils';
 
 export interface Tracklist {
   name: string;
   artist: string;
   date: Date;
-  tracks: Track[];
-  genres: string[];
+  tracks: Array<Track>;
+  genres: Array<string>;
   url: string;
 }
 

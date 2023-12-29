@@ -44,6 +44,7 @@ export class NetworkClient {
     return cookie;
   }
 
+  // TODO: fix body, content type etc...
   async makeRequest(method: HttpMethod, slug: string, body?: string, contentType?: string): Promise<string> {
     return fetch(`${this.baseUrl}${slug}`, {
       method,

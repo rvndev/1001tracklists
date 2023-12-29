@@ -21,23 +21,31 @@ export function encode(plaintext: string): number {
 export async function solveChallenge(res: Response): Promise<Solution> {
   // Extract guid from cookies
   const cookies = res.headers.get('set-cookie')?.split(',');
-  if (cookies === undefined) throw new Error("Couldn't extract cookies");
+  if (cookies === undefined) {
+    throw new Error("Couldn't extract cookies");
+  }
   const guidCookie = cookies.find((c) => c.includes('guid'));
   const guid = guidCookie?.split(';')?.[0].split('=')[1];
 
-  if (guid === undefined) throw new Error("Couldn't extract guid");
+  if (guid === undefined) {
+    throw new Error("Couldn't extract guid");
+  }
 
   // Extract bChk, ts challenge values from raw HTML
   const html = await res.text();
 
   const tempVariableSnippet = html.match(/<script>var .*<\/script>/)?.[0];
   const tempVariableValue = tempVariableSnippet?.match(/'.*'/)?.[0].replace(/'/g, '');
-  if (tempVariableValue === undefined) throw new Error('bChk could not be extracted');
+  if (tempVariableValue === undefined) {
+    throw new Error('bChk could not be extracted');
+  }
   const bChk = encode(tempVariableValue);
 
   const timestampSnippet = html.match(/i\.name='ts';i\.value=\s\d+/);
   const ts = Number(timestampSnippet?.[0].match(/\d+/)?.[0]);
-  if (Number.isNaN(ts) || ts === 0) throw new Error('ts could not be extracted');
+  if (Number.isNaN(ts) || ts === 0) {
+    throw new Error('ts could not be extracted');
+  }
 
   return {
     guid,
