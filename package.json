@@ -38,6 +38,6 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "jsdom": "^22.1.0"
+    "linkedom": "^0.16.5"
   }
 }
